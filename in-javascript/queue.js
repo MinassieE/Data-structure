@@ -19,7 +19,7 @@ class Queue {
             this.first = newNode;
             this.last = newNode;
         } else {
-            newNode.next = this.last;
+            this.last.next = newNode;
             this.last = newNode;
         }
 
@@ -27,7 +27,26 @@ class Queue {
         return this;
     }
 
+    dequeue(){
+        if(this.length === 0) return undefined;
+        let temp = this.first;
+        if(this.length === 1){
+            this.first = null;
+            this.last = null;
+        } else {
+            this.first = this.first.next;
+            temp.next=null;
+        }
+        this.length--;
+        return temp;
+
+    }
+
 }
 
+//test
 let myQueue = new Queue(5);
-console.log(myQueue.enqueue(6));
+myQueue.enqueue(6);
+console.log(myQueue.enqueue(7));
+myQueue.dequeue();
+console.log(myQueue);
